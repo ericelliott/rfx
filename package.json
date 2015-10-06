@@ -1,0 +1,28 @@
+{
+  "name": "rfx",
+  "version": "1.0.0",
+  "description": "A dead simple API to integrate rtypes into live code.",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "babel-node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericelliott/rfx.git"
+  },
+  "keywords": [
+    "types",
+    "rtype",
+    "machine",
+    "effects",
+    "rfx",
+    "fx",
+    "processor"
+  ],
+  "author": "Eric Elliott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ericelliott/rfx/issues"
+  },
+  "homepage": "https://github.com/ericelliott/rfx#readme"
+}

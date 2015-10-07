@@ -11,6 +11,7 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
   - Generate external TypeScript annotation files for IDE tooling.
   - Access type metadata inside your program at runtime.
   - Optional runtime typechecking in development.
+* Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
 
 ## Status - Developer Preview
 

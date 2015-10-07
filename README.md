@@ -56,4 +56,6 @@ const myInterface = rfx(predicate).with({
   we're in ES6, it supports injected ${ vars }.`,
   fn: myFunction
 });
+
+myInterface({}); // Runtime type warning.
 ```

@@ -6,12 +6,12 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
 
 `rfx` does two pretty amazing things:
 
-* Lets you easily specify Rtypes in standard JavaScript. What's possible with rtypes?
+1. Lets you easily specify Rtypes in standard JavaScript. What's possible with rtypes?
   - Generate docs like JSDoc.
   - Generate external TypeScript annotation files for IDE tooling.
   - Access type metadata inside your program at runtime.
   - Optional runtime typechecking in development.
-* Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
+2. Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
 
 ## Status - Developer Preview
 

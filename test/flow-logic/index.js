@@ -78,4 +78,20 @@ test('rfx', nest => {
       fn () {}
     })();
   });
+
+  nest.test('...with fn return', assert => {
+    const fx = rfx({
+      fn () {
+        return 'a';
+      }
+    });
+
+    const actual = fx();
+    const expected = 'a';
+
+    assert.equal(actual, expected,
+      'should pass return value from function');
+
+    assert.end();
+  });
 });

@@ -25,7 +25,7 @@ const rfx = (options = {}) => {
   return (...args) => {
     const { fn } = options;
     if (typeof check === 'function') check(...args);
-    fn(...args);
+    return fn(...args);
   };
 };
 

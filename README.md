@@ -13,9 +13,9 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
   - Optional runtime typechecking in development.
 2. Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
 
-It's driven by the idea originally inspired by Lisp: Code as data. We're extending this concept to what some people think of as metadata: type information and documentation.
+It's driven by the idea originally inspired by Lisp: Code as data. We're extending this concept to type information and documentation metadata.
 
-This provides several benefits, but importantly, it makes your code literally self-documenting, and opens up the possibility of serious realtime development using live coding systems like React Transform, and powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript.
+This provides several benefits, but importantly, it makes your code literally self-documenting, and opens up the possibility of serious realtime development using live coding systems like React Transform, and powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript. (Note: The TypeScript team is actively working on [runtime type reflection](http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4), but it currently requires you to opt-in to experimental TypeScript features, and it works using the unstable `Reflect` API proposal for ES7+.)
 
 
 ## Status - Developer Preview

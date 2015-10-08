@@ -96,7 +96,7 @@ rfx({
 
 ### The `type` Parameter
 
-The `type` parameter expects an rtype parameter, which can be represented in many different forms, including standard JS literal notations.
+The `type` parameter expects an `rtype` interface, which comes in many different forms, including standard JS literal notations.
 
 It can also take a `predicate` function:
 

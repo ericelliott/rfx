@@ -106,7 +106,7 @@ predicate(...args?: any): boolean
 
 ### composableFunction
 
-Interfaces support composition using the [Stamp Specification](https://github.com/stampit-org/stamp-specification), which means that you can compose the interface with other interfaces, with stamps, or even with React components via [react-stamp](https://github.com/stampit-org/react-stamp).
+`rfx` Interfaces support composition using the [Stamp Specification](https://github.com/stampit-org/stamp-specification), which means that you can compose the interface with other interfaces, with stamps, or even with React components via [react-stamp](https://github.com/stampit-org/react-stamp).
 
 ```js
 interface composableFunction {

@@ -90,7 +90,7 @@ rfx({
   description?: string,
   doc?: string,
   example?: string,
-  fn: func
+  fn: Function
 }): composableFunction
 ```
 
@@ -111,6 +111,6 @@ predicate(...args?: any): boolean
 ```js
 interface composableFunction {
   (...args?: any): any,
-  compose: (...args?: stamp|descriptor): func
+  compose: (...args?: stamp|descriptor): Function
 }
 ```

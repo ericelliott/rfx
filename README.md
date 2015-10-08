@@ -13,6 +13,11 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
   - Optional runtime typechecking in development.
 2. Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
 
+It's driven by the idea originally inspired by Lisp: Code as data. We're extending this concept to what some people think of as metadata: type information and documentation.
+
+This provides several benefits, but importantly, it makes your code literally self-documenting, and opens up the possibility of serious realtime development using live coding systems like React Transform, and powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript.
+
+
 ## Status - Developer Preview
 
 `rfx` is not fully implemented, yet. We still have to write an rtype parser. However, feel free to experiment with `React.PropTypes` or regular predicate functions. What's a predicate function, you ask? Give it some arguments, and get back a `true` or `false` value indicating whether or not the arguments passed the test.
@@ -20,7 +25,7 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
-(...args: any): boolean
+(...args?: any): boolean
 ```
 
 
@@ -50,12 +55,43 @@ const predicate = (foo) => {
   return typeof 'foo' === string;
 };
 
-const myInterface = rfx(predicate).with({
+const myInterface = rfx({
+  type: predicate, // see rtypes
   name: 'myFxName',
-  doc: `A nice multiline description here... and since
+  description: 'A one-line description of the function purpose.',
+  doc: `A nice multiline description here. Since
   we're in ES6, it supports injected ${ vars }.`,
+  example:`
+    // Example usage goes here.
+    // Should be written in JavaScript.
+  `,
   fn: myFunction
 });
 
 myInterface({}); // Runtime type warning.
+```
+
+## rfx()
+
+Take a POJO interface description. Return a working interface, complete with optional run time type checking.
+
+```js
+rfx({
+  type: rtype,
+  name: string,
+  description: string,
+  doc: string,
+  example: string,
+  fn: func
+})
+```
+
+### The type Parameter
+
+The `type` parameter expects an rtype parameter, which can be represented in many different forms, including standard JS literal notations.
+
+It can also take a `predicate` function:
+
+```js
+predicate(...args?: any): boolean
 ```

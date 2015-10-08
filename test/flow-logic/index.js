@@ -12,27 +12,17 @@ rfx(myInterface).with({
 */
 
 test('rfx', nest => {
-  nest.test('...with lambda as rtype, dev env, & no args', assert => {
-    process.env.NODE_ENV = 'development';
-
-    rfx(() => {
-      assert.pass('should call typecheck function');
-      assert.end();
-    }).with({
-      fn () {}
-    })();
-  });
-
-  nest.test('...with lambda as rtype, dev env, & invalid args', assert => {
+  nest.test('...with lambda as rtype, dev env, onError & invalid args', assert => {
     assert.plan(4);
 
     process.env.NODE_ENV = 'development';
 
-    rfx((input) => {
-      assert.pass('should type check');
+    rfx({
+      type (input) {
+        assert.pass('should type check');
 
-      return typeof input === 'boolean';
-    }).with({
+        return typeof input === 'boolean';
+      },
       fn () {
         assert.pass('should call fn');
       },
@@ -55,5 +45,37 @@ test('rfx', nest => {
         assert.pass('should call onError');
       }
     })('foo', 'bar', 'baz');
+  });
+
+  nest.test('...with lambda as rtype, prod env, onError & invalid args', assert => {
+    assert.plan(1);
+
+    process.env.NODE_ENV = 'production';
+
+    rfx({
+      type (input) {
+        assert.fail('should not type check');
+
+        return typeof input === 'boolean';
+      },
+      fn () {
+        assert.pass('should call fn');
+      },
+      onError () {
+        assert.fail('should not call onError');
+      }
+    })('foo', 'bar', 'baz');
+  });
+
+  nest.test('...with lambda as rtype, dev env, & no args', assert => {
+    process.env.NODE_ENV = 'development';
+
+    rfx({
+      type () {
+        assert.pass('should call typecheck function');
+        assert.end();
+      },
+      fn () {}
+    })();
   });
 });

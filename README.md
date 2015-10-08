@@ -20,13 +20,21 @@ This provides several benefits, but importantly, it makes your code literally se
 
 ## Status - Developer Preview
 
-`rfx` is not fully implemented, yet. We still have to write an rtype parser. However, feel free to experiment with `React.PropTypes` or regular predicate functions. What's a predicate function, you ask? Give it some arguments, and get back a `true` or `false` value indicating whether or not the arguments passed the test.
+You've arrived while the band was doing the sound check. Score! Free backstage passes!
+
+`rfx` is not fully implemented, yet. However, feel free to experiment with `React.PropTypes` or regular predicate functions. What's a predicate function, you ask? Give it some arguments, and get back a `true` or `false` value indicating whether or not the arguments passed the test.
 
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
 (...args?: any): boolean
 ```
+
+Roadmap:
+* [x] Predicate function support
+* [ ] Make composable
+* [ ] Add rtype builtins
+* [ ] Add rtype string support
 
 
 ## Getting Started
@@ -77,16 +85,16 @@ Take a POJO interface description. Return a working interface, complete with opt
 
 ```js
 rfx({
-  type: rtype,
-  name: string,
-  description: string,
-  doc: string,
-  example: string,
+  type?: rtype,
+  name?: string,
+  description?: string,
+  doc?: string,
+  example?: string,
   fn: func
-})
+}): composableFunction
 ```
 
-### The type Parameter
+### The `type` Parameter
 
 The `type` parameter expects an rtype parameter, which can be represented in many different forms, including standard JS literal notations.
 
@@ -94,4 +102,15 @@ It can also take a `predicate` function:
 
 ```js
 predicate(...args?: any): boolean
+```
+
+### composableFunction
+
+Interfaces support composition using the [Stamp Specification](https://github.com/stampit-org/stamp-specification), which means that you can compose the interface with other interfaces, with stamps, or even with React components via [react-stamp](https://github.com/stampit-org/react-stamp).
+
+```js
+interface composableFunction {
+  (...args?: any): any,
+  compose: (...args?: stamp|descriptor): func
+}
 ```

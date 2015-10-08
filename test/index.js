@@ -1,1 +1,1 @@
-import './flow-logic/index.js';
+import './flow-logic/index';

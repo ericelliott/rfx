@@ -27,7 +27,7 @@ You've arrived while the band was doing the sound check. Score! Free backstage p
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
-(...args?: any): boolean
+(...args?: any[]): boolean
 ```
 
 Roadmap:
@@ -101,7 +101,7 @@ The `type` parameter expects an `rtype` interface, which comes in many different
 It can also take a `predicate` function:
 
 ```js
-predicate(...args?: any): boolean
+predicate(...args?: any[]): boolean
 ```
 
 ### composableFunction
@@ -110,7 +110,7 @@ predicate(...args?: any): boolean
 
 ```js
 interface composableFunction {
-  (...args?: any): any,
-  compose: (...args?: stamp|descriptor): Function
+  (...args?: any[]): any,
+  compose: (...args?: stamp|descriptor[]): Function
 }
 ```

@@ -1,6 +1,6 @@
 # rfx
 
-Easy composable interfaces for JavaScript.
+Self documenting, composable interfaces.
 
 In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.com/ericelliott/rtype#rtype).
 

@@ -36,6 +36,8 @@ Roadmap:
 * [ ] Add rtype builtins
 * [ ] Add rtype string support
 
+See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/master/doc/future.md).
+
 
 ## Getting Started
 

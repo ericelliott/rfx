@@ -14,9 +14,9 @@ rfx({
 ```js
 rfx({
   t: [
-    sig`(...args: obj[]): obj`,
-    sig`(input: string): foo`,
-    rt`interface foo { bar: string }`
+    '(...args: obj[]): obj',
+    '(input: string): foo',
+    'interface foo { bar: string }'
   ],
   fn (input, ...args) { /* ... */ }
 });

@@ -1,17 +1,16 @@
 # rfx
 
-Self documenting, composable interfaces.
+Self documenting, run-time usable interfaces.
 
 In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.com/ericelliott/rtype#rtype).
 
-`rfx` does two pretty amazing things:
+What does `rfx` do?
 
-1. Lets you easily specify Rtypes in standard JavaScript. What could be possible with rtypes?
+1. Lets you easily specify [rtypes](https://github.com/ericelliott/rtype#rtype) in standard JavaScript. What could be possible with rtypes?
   - Generate docs like JSDoc.
   - Generate external TypeScript annotation files for IDE tooling.
   - Access type metadata inside your program at runtime.
   - Optional runtime typechecking in development.
-2. Creates composable interfaces. See the [Stamp specification](https://github.com/stampit-org/stamp-specification/tree/master#stamp-specification-composables) for composition details.
 
 It's driven by the idea originally inspired by Lisp: Code as data. We're extending this concept to type information and documentation metadata.
 
@@ -32,7 +31,6 @@ Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the
 
 Roadmap:
 * [x] Predicate function support
-* [ ] Make composable
 * [ ] Add rtype builtins
 * [ ] Add rtype string support
 
@@ -93,7 +91,7 @@ rfx({
   doc?: string,
   example?: string,
   fn: Function
-}): composableFunction
+}): Function
 ```
 
 ### The `type` Parameter
@@ -104,15 +102,4 @@ It can also take a `predicate` function:
 
 ```js
 predicate(...args?: any[]): boolean
-```
-
-### composableFunction
-
-`rfx` Interfaces support composition using the [Stamp Specification](https://github.com/stampit-org/stamp-specification), which means that you can compose the interface with other interfaces, with stamps, or even with React components via [react-stamp](https://github.com/stampit-org/react-stamp).
-
-```js
-interface composableFunction {
-  (...args?: any[]): any,
-  compose: (...args?: stamp|descriptor[]): Function
-}
 ```

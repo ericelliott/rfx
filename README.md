@@ -6,7 +6,7 @@ In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.
 
 What does `rfx` do?
 
-1. Lets you easily specify [rtypes](https://github.com/ericelliott/rtype#rtype) in standard JavaScript. What could be possible with rtypes?
+`rfx` lets you easily specify [rtypes](https://github.com/ericelliott/rtype#rtype) in standard JavaScript. What could be possible with rtypes?
   - Generate docs like JSDoc.
   - Generate external TypeScript annotation files for IDE tooling.
   - Access type metadata inside your program at runtime.

@@ -1,6 +1,6 @@
 # rfx
 
-Self documenting, run-time usable interfaces.
+Self documenting, runtime interfaces.
 
 In `rfx`, interfaces are called `fx`. The `r` stands for [rtype](https://github.com/ericelliott/rtype#rtype).
 

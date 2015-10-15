@@ -22,11 +22,11 @@ const rfx = (options = {}) => {
 
   const check = buildCheck({ shouldCheck, rtype: type, onError, options });
 
-  return (...args) => {
+  return Object.assign(function fx (...args) {
     const { fn } = options;
     if (typeof check === 'function') check(...args);
     return fn(...args);
-  };
+  }, options.fn);
 };
 
 export default rfx;

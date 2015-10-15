@@ -2,15 +2,6 @@ import test from 'tape';
 
 import rfx from '../../source/index';
 
-/*
-rfx(myInterface).with({
-  name: 'myFxName',
-  doc: `A nice multiline description here... and since
-  we're in ES6, it supports injected ${ vars }.`,
-  fn: myFunction
-});
-*/
-
 test('rfx', nest => {
   nest.test('...with lambda as rtype, dev env, onError & invalid args', assert => {
     assert.plan(4);

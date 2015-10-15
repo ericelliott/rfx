@@ -1,16 +1,15 @@
 import test from 'tape';
 import rfx from '../../source/index';
-import { isComposable } from 'stamp-utils';
+import { compose, isComposable } from 'stamp-utils';
 
-test('.compose()', assert => {
+test('rfx with composable', assert => {
+  const msg = 'should return a composable';
   const fx = rfx({
-    fn () {}
+    fn: compose()
   });
   const actual = isComposable(fx);
   const expected = true;
 
-  assert.equal(actual, expected,
-    'should return a composable');
-
+  assert.equal(actual, expected, msg);
   assert.end();
 });

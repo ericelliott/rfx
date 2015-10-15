@@ -1,1 +1,2 @@
-import './flow-logic/index';
+import './flow-logic';
+import './composition';

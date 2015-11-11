@@ -1,3 +1,5 @@
+import 'core-js';
+
 const runCheck = ({ rtype, onError, options }) => {
   return (...args) => {
     if (!rtype(...args) && typeof onError === 'function') {

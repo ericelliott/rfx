@@ -5,7 +5,11 @@
   "main": "build/index.js",
   "scripts": {
     "lint": "eslint test source",
+    "clean": "rimraf build && mkdir build",
+    "prebuild": "npm run clean",
+    "build": "babel -d build source -s",
     "test": "babel-node test/index.js",
+    "check": "npm run -s lint && npm -s test && npm -s run build",
     "watch": "watch 'clear && npm run -s lint && npm -s test' source test"
   },
   "repository": {
@@ -32,7 +36,12 @@
     "babel-eslint": "^4.1.3",
     "eslint": "^1.6.0",
     "lodash": "^3.10.1",
+    "rimraf": "^2.4.3",
     "tape": "^4.2.1",
     "watch": "^0.16.0"
+  },
+  "dependencies": {
+    "core-js": "^1.2.6",
+    "stamp-utils": "^1.2.4"
   }
 }

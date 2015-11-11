@@ -2,17 +2,8 @@ import test from 'tape';
 
 import rfx from '../../source/index';
 
-/*
-rfx(myInterface).with({
-  name: 'myFxName',
-  doc: `A nice multiline description here... and since
-  we're in ES6, it supports injected ${ vars }.`,
-  fn: myFunction
-});
-*/
-
 test('rfx', nest => {
-  nest.test('...with lambda as rtype, dev env, onError & invalid args', assert => {
+  nest.test('...predicate rtype, dev env, onError & invalid args', assert => {
     assert.plan(4);
 
     process.env.NODE_ENV = 'development';
@@ -47,7 +38,7 @@ test('rfx', nest => {
     })('foo', 'bar', 'baz');
   });
 
-  nest.test('...with lambda as rtype, prod env, onError & invalid args', assert => {
+  nest.test('...predicate rtype, prod env, onError & invalid args', assert => {
     assert.plan(1);
 
     process.env.NODE_ENV = 'production';
@@ -67,7 +58,7 @@ test('rfx', nest => {
     })('foo', 'bar', 'baz');
   });
 
-  nest.test('...with lambda as rtype, dev env, & no args', assert => {
+  nest.test('...predicate rtype, dev env, & no args', assert => {
     process.env.NODE_ENV = 'development';
 
     rfx({

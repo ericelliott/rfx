@@ -72,14 +72,14 @@ export const myFunction = (param, otherParam, options) => {
   /* (Just business logic.) */
 }
 
-const predicate = (param, otherParam, options) => (
+const type = (param, otherParam, options) => (
   typeof param === 'string' &&
   typeof otherParam === 'object' &&
   /* ... (Type checking optional and neatly separated!) */
 );
 
 export const myInterface = rfx({
-  type: predicate, // see rtypes
+  type,
   name: 'myFxName',
   description: 'A one-line description of the function purpose.',
   doc: `A nice multiline description here. Since
@@ -95,6 +95,33 @@ myInterface(1, 2, {}); // Run `myFunction` with runtime type checking…
 
 myFunction(1, 2, {}); // …or just the raw thing. Lightning-fast!
 ```
+
+
+**There’s more!**
+
+Soon you won’t need to write the `type` and `name` by hand!
+
+```js
+import r from 'parse-rtype';  // Watch out! This is dreamcode!
+
+export const myInterface = rfx({
+  type: r`
+    myFxName(
+      param: string,
+      otherParam: [x, y]: number[],
+      options?: {beep = false: boolean},
+    ): number
+  `,
+
+  description: /* ... */,
+  doc: /* ... */,
+  example: /* ... */,
+  fn: myFunction,
+})
+```
+
+See [rtype](https://github.com/ericelliott/rtype#rtype) for more info.
+
 
 ## rfx()
 

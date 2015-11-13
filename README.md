@@ -44,12 +44,24 @@ See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/mast
 **Old 'n' busted:**
 
 ```js
+/**
+ * A one-line description of the function’s purpose
+ *
+ * More docs. Just static text.
+ *
+ * @function myFxName
+ * @param {string} param
+ * @param {array} otherParam
+ * @param {number} otherParam[0]
+ * ... (Lots of info. Not too readable.)
+ */
 function myFunction (param, otherParam, options) {
   if (typeof param !== 'string') throw new TypeError('Oh noes!');
   if (typeof otherParam !== 'object' || /* ...
   ...
   ...
   ... (Manual type checking. Dreadful!)
+  ... (jsDoc info from above can’t be used in any way.)
   ...
   ...
   */

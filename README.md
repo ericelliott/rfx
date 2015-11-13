@@ -44,8 +44,17 @@ See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/mast
 **Old 'n' busted:**
 
 ```js
-function myInterface (options) {
-  /* do stuff with options here */
+function myFunction (param, otherParam, options) {
+  if (typeof param !== 'string') throw new TypeError('Oh noes!');
+  if (typeof otherParam !== 'object' || /* ...
+  ...
+  ...
+  ... (Manual type checking. Dreadful!)
+  ...
+  ...
+  */
+
+  /* (Business logic.) */
 }
 ```
 
@@ -59,11 +68,17 @@ npm install --save rfx
 ```js
 import rfx from 'rfx';
 
-const predicate = (foo) => {
-  return typeof 'foo' === string;
-};
+export const myFunction = (param, otherParam, options) => {
+  /* (Just business logic.) */
+}
 
-const myInterface = rfx({
+const predicate = (param, otherParam, options) => (
+  typeof param === 'string' &&
+  typeof otherParam === 'object' &&
+  /* ... (Type checking optional and neatly separated!) */
+);
+
+export const myInterface = rfx({
   type: predicate, // see rtypes
   name: 'myFxName',
   description: 'A one-line description of the function purpose.',
@@ -76,7 +91,9 @@ const myInterface = rfx({
   fn: myFunction
 });
 
-myInterface({}); // Runtime type warning.
+myInterface(1, 2, {}); // Run `myFunction` with runtime type checking…
+
+myFunction(1, 2, {}); // …or just the raw thing. Lightning-fast!
 ```
 
 ## rfx()

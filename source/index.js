@@ -8,7 +8,20 @@ const runCheck = ({ rtype, onError, options }) => {
   };
 };
 
-const buildCheck = ({ shouldCheck, rtype, onError, options }) => {
+const buildCheck = (params) => {
+  const { shouldCheck, rtype, options } = params;
+
+  const shouldThrowByDefault = typeof process !== 'undefined' &&
+    process.env.NODE_ENV === 'development';
+
+  const onError = (typeof options.onError === 'function' ?
+    options.onError :
+    (shouldThrowByDefault ?
+      (error) => { throw error; } :
+      null
+    )
+  );
+
   return shouldCheck ?
     typeof rtype === 'function' ?
       runCheck({ rtype, onError, options }) :

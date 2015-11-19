@@ -90,6 +90,7 @@ rfx({
   description?: String,
   doc?: String,
   example?: String,
+  onError?: (error: TypeError): Void,
   ...metadata?: Object,
   fn: Function
 }): Function
@@ -104,6 +105,12 @@ It can also take a `predicate` function:
 ```js
 predicate(...args?: Any[]): Boolean
 ```
+
+### Error handling
+
+Whenever the type check fails the `onError` callback will be called. This behavior is opt-out – if the environment variable `NODE_ENV` is set to `production`, no type checking will be performed.
+
+If the type check fails and you don’t specify an `onError` callback, we’ll throw a descriptive `TypeError`. This behavior is opt-in – if you want us to throw by default, you need to set the environment variable `NODE_ENV` to `development`. You can use *[envify](https://github.com/hughsk/envify)* to make this work in your browser.
 
 ### Additional `metadata`
 

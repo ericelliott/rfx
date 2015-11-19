@@ -3,12 +3,40 @@ import 'core-js';
 const runCheck = ({ rtype, onError, options }) => {
   return (...args) => {
     if (!rtype(...args) && typeof onError === 'function') {
-      onError({ args, options });
+      const errorMessage = (
+        `Type check failed!${ rtype.signature ?
+          (
+            ` Expected signature: \`${ rtype.signature }\`. More info: ` +
+            'https://git.io/rtype .'
+          ) :
+          ''
+        }`
+      );
+
+      const error = Object.assign(
+        new TypeError(errorMessage),
+        { args, options }
+      );
+
+      onError(error);
     }
   };
 };
 
-const buildCheck = ({ shouldCheck, rtype, onError, options }) => {
+const buildCheck = (params) => {
+  const { shouldCheck, rtype, options } = params;
+
+  const shouldThrowByDefault = typeof process !== 'undefined' &&
+    process.env.NODE_ENV === 'development';
+
+  const onError = (typeof options.onError === 'function' ?
+    options.onError :
+    (shouldThrowByDefault ?
+      (error) => { throw error; } :
+      null
+    )
+  );
+
   return shouldCheck ?
     typeof rtype === 'function' ?
       runCheck({ rtype, onError, options }) :
@@ -19,7 +47,7 @@ const buildCheck = ({ shouldCheck, rtype, onError, options }) => {
 const rfx = (options = {}) => {
   const { type, onError } = options;
 
-  const shouldCheck = process &&
+  const shouldCheck = typeof process !== 'undefined' &&
     process.env.NODE_ENV !== 'production';
 
   const check = buildCheck({ shouldCheck, rtype: type, onError, options });
@@ -28,7 +56,7 @@ const rfx = (options = {}) => {
     const { fn } = options;
     if (typeof check === 'function') check(...args);
     return fn(...args);
-  }, options.fn);
+  }, options.fn, options);
 };
 
 export default rfx;

@@ -152,6 +152,8 @@ rfx({
   description?: String,
   doc?: String,
   example?: String,
+  onError?: (error: TypeError): Void,
+  ...metadata?: Object,
   fn: Function
 }): Function
 ```
@@ -165,3 +167,15 @@ It can also take a `predicate` function:
 ```js
 predicate(...args?: Any[]): Boolean
 ```
+
+### Error handling
+
+Whenever the type check fails the `onError` callback will be called. This behavior is opt-out – if the environment variable `NODE_ENV` is set to `production`, no type checking will be performed.
+
+If the type check fails and you don’t specify an `onError` callback, we’ll throw a descriptive `TypeError`. This behavior is opt-in – if you want us to throw by default, you need to set the environment variable `NODE_ENV` to `development`. You can use *[envify](https://github.com/hughsk/envify)* to make this work in your browser.
+
+### Additional `metadata`
+
+All properties attached to the `fn` function and to the interface description will be copied over to the interface.
+
+You can use this to attach additional metadata to your function. We recommend namespacing your metadata to one property for better protection against name conflicts.

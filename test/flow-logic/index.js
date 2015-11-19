@@ -88,16 +88,32 @@ test('rfx', nest => {
 
   nest.test('...with meta data', assert => {
     const myNamespace = {};
+
+    const fn = () => null;
+    const myFunctionProperty = {};
+    fn.myFunctionProperty = 'should be overridden!';
+
     const fx = rfx({
       myNamespace,
-      fn: () => null
+      myFunctionProperty,
+      fn
     });
 
-    const actual = fx.myNamespace;
-    const expected = myNamespace;
+    {
+      const actual = fx.myNamespace;
+      const expected = myNamespace;
 
-    assert.equal(actual, expected,
-      'should attach extra properties to the interface');
+      assert.equal(actual, expected,
+        'should attach extra properties to the interface');
+    }
+
+    {
+      const actual = fx.myFunctionProperty;
+      const expected = myFunctionProperty;
+
+      assert.equal(actual, expected,
+        'should overwrite function properties with interface properties');
+    }
 
     assert.end();
   });

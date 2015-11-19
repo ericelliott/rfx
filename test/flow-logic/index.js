@@ -85,4 +85,20 @@ test('rfx', nest => {
 
     assert.end();
   });
+
+  nest.test('...with meta data', assert => {
+    const myNamespace = {};
+    const fx = rfx({
+      myNamespace,
+      fn: () => null
+    });
+
+    const actual = fx.myNamespace;
+    const expected = myNamespace;
+
+    assert.equal(actual, expected,
+      'should attach extra properties to the interface');
+
+    assert.end();
+  });
 });

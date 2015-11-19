@@ -26,7 +26,7 @@ You've arrived while the band was doing the sound check. Score! Free backstage p
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
-(...args?: any[]): boolean
+(...args?: Any[]): Boolean
 ```
 
 Roadmap:
@@ -44,8 +44,35 @@ See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/mast
 **Old 'n' busted:**
 
 ```js
-function myInterface (options) {
-  /* do stuff with options here */
+/**
+ * A one-line description of the function’s purpose
+ *
+ * More docs. Just static text.
+ *
+ * @function myFxName
+ * @param {string} param
+ * @param {array} otherParam
+ * @param {number} otherParam[0]
+ * @param {number} otherParam[1]
+ * @param {number} otherParam[2]
+ * @param {object} options
+ * @param {boolean} [options.beep=false]
+ * @return {number}
+ *
+ * (Lots of info. Not too readable.)
+ */
+function myFunction (param, otherParam, options) {
+  if (typeof param !== 'string') throw new TypeError('Oh noes!');
+  if (typeof otherParam !== 'object' || otherParam.length <= 3) /* ...
+  ...
+  ...
+  ... (Manual type checking. Dreadful!)
+  ... (jsDoc info from above can’t be used in any way.)
+  ...
+  ...
+  */
+
+  /* (Business logic.) */
 }
 ```
 
@@ -59,12 +86,18 @@ npm install --save rfx
 ```js
 import rfx from 'rfx';
 
-const predicate = (foo) => {
-  return typeof 'foo' === string;
-};
+export const myFunction = (param, otherParam, options) => {
+  /* (Just business logic.) */
+}
 
-const myInterface = rfx({
-  type: predicate, // see rtypes
+const type = (param, otherParam, options) => (
+  typeof param === 'string' &&
+  otherParam instanceof Array &&
+  /* ... (Type checking optional and neatly separated!) */
+);
+
+export const myInterface = rfx({
+  type,
   name: 'myFxName',
   description: 'A one-line description of the function purpose.',
   doc: `A nice multiline description here. Since
@@ -76,8 +109,37 @@ const myInterface = rfx({
   fn: myFunction
 });
 
-myInterface({}); // Runtime type warning.
+myInterface(1, 2, {}); // Run `myFunction` with runtime type checking…
+
+myFunction(1, 2, {}); // …or just the raw thing. Lightning-fast!
 ```
+
+
+**There’s more!**
+
+Soon you won’t need to write the `type` and `name` by hand!
+
+```js
+import r from 'parse-rtype';  // Watch out! This is dreamcode!
+
+export const myInterface = rfx({
+  type: r`
+    myFxName(
+      param: String,
+      otherParam: [x: Number, y: Number, z: Number],
+      options?: {beep = false: Boolean},
+    ): Number
+  `,
+
+  description: /* ... */,
+  doc: /* ... */,
+  example: /* ... */,
+  fn: myFunction,
+})
+```
+
+See [rtype](https://github.com/ericelliott/rtype#rtype) for more info.
+
 
 ## rfx()
 
@@ -85,11 +147,11 @@ Take a POJO interface description. Return a working interface, complete with opt
 
 ```js
 rfx({
-  type?: rtype,
-  name?: string,
-  description?: string,
-  doc?: string,
-  example?: string,
+  type?: Rtype,
+  name?: String,
+  description?: String,
+  doc?: String,
+  example?: String,
   fn: Function
 }): Function
 ```
@@ -101,5 +163,5 @@ The `type` parameter expects an `rtype` interface, which comes in many different
 It can also take a `predicate` function:
 
 ```js
-predicate(...args?: any[]): boolean
+predicate(...args?: Any[]): Boolean
 ```

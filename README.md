@@ -90,6 +90,7 @@ rfx({
   description?: String,
   doc?: String,
   example?: String,
+  ...metadata?: Object,
   fn: Function
 }): Function
 ```
@@ -103,3 +104,9 @@ It can also take a `predicate` function:
 ```js
 predicate(...args?: Any[]): Boolean
 ```
+
+### Additional `metadata`
+
+All properties attached to the `fn` function and to the interface description will be copied over to the interface.
+
+You can use this to attach additional metadata to your function. We recommend namespacing your metadata to one property for better protection against name conflicts.

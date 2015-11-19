@@ -28,7 +28,7 @@ const rfx = (options = {}) => {
     const { fn } = options;
     if (typeof check === 'function') check(...args);
     return fn(...args);
-  }, options.fn);
+  }, options.fn, options);
 };
 
 export default rfx;

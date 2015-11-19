@@ -123,10 +123,10 @@ import r from 'parse-rtype';  // Watch out! This is dreamcode!
 export const myInterface = rfx({
   type: r`
     myFxName(
-      param: string,
-      otherParam: [x, y]: number[],
-      options?: {beep = false: boolean},
-    ): number
+      param: String,
+      otherParam: [x: Number, y: Number],
+      options?: {beep = false: Boolean},
+    ): Number
   `,
 
   description: /* ... */,

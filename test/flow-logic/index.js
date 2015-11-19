@@ -86,7 +86,7 @@ test('rfx', nest => {
     assert.end();
   });
 
-  nest.test('...with meta data', assert => {
+  nest.test('...with metadata', assert => {
     const myNamespace = {};
 
     const fn = () => null;

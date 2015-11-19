@@ -181,6 +181,7 @@ test('rfx', nest => {
       type () {
         assert.pass('should call typecheck function');
         assert.end();
+        return true;
       },
       fn () {}
     })();

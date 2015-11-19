@@ -38,6 +38,43 @@ test('rfx', nest => {
     })('foo', 'bar', 'baz');
   });
 
+  nest.test('...predicate rtype, dev env & default error handling', assert => {
+    assert.plan(3);
+
+    process.env.NODE_ENV = 'development';
+
+    const fx = rfx({
+      type () {
+        assert.pass('should type check');
+        return false;
+      },
+
+      fn () {
+        assert.fail('should not call fn');
+      }
+    });
+
+    try {
+      fx();
+    } catch (error) {
+      {
+        const actual = error.constructor;
+        const expected = TypeError;
+
+        assert.equal(actual, expected,
+          'should throw a TypeError');
+      }
+
+      {
+        const expectedContent = /wrong parameters.+predicate function/i;
+        const actualContent = error.message;
+
+        assert.ok(expectedContent.test(actualContent),
+          'should throw a descriptive error');
+      }
+    }
+  });
+
   nest.test('...predicate rtype, prod env, onError & invalid args', assert => {
     assert.plan(1);
 
@@ -56,6 +93,71 @@ test('rfx', nest => {
         assert.fail('should not call onError');
       }
     })('foo', 'bar', 'baz');
+  });
+
+  nest.test('...predicate rtype, prod env, default error handling', assert => {
+    assert.plan(2);
+
+    process.env.NODE_ENV = 'production';
+
+    const fx = rfx({
+      type () {
+        assert.fail('should not type check');
+        return false;
+      },
+
+      fn () {
+        assert.pass('should call fn');
+      }
+    });
+
+    assert.doesNotThrow(
+      () => fx(),
+      'should not throw an error'
+    );
+  });
+
+  nest.test('...predicate rtype, unknown env & onError', assert => {
+    assert.plan(3);
+
+    process.env.NODE_ENV = null;
+
+    rfx({
+      type () {
+        assert.pass('should type check');
+        return false;
+      },
+
+      fn () {
+        assert.pass('should call fn');
+      },
+
+      onError () {
+        assert.pass('should call onError');
+      }
+    })();
+  });
+
+  nest.test('...predicate rtype, unknown env & default error handling', assert => {
+    assert.plan(3);
+
+    process.env.NODE_ENV = null;
+
+    const fx = rfx({
+      type () {
+        assert.pass('should type check');
+        return false;
+      },
+
+      fn () {
+        assert.pass('should call fn');
+      }
+    });
+
+    assert.doesNotThrow(
+      () => fx(),
+      'should not throw an error'
+    );
   });
 
   nest.test('...predicate rtype, dev env, & no args', assert => {

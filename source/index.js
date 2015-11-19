@@ -19,7 +19,7 @@ const buildCheck = ({ shouldCheck, rtype, onError, options }) => {
 const rfx = (options = {}) => {
   const { type, onError } = options;
 
-  const shouldCheck = process &&
+  const shouldCheck = typeof process !== 'undefined' &&
     process.env.NODE_ENV !== 'production';
 
   const check = buildCheck({ shouldCheck, rtype: type, onError, options });

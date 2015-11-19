@@ -26,7 +26,7 @@ You've arrived while the band was doing the sound check. Score! Free backstage p
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
-(...args?: any[]): boolean
+(...args?: Any[]): Boolean
 ```
 
 Roadmap:
@@ -85,11 +85,11 @@ Take a POJO interface description. Return a working interface, complete with opt
 
 ```js
 rfx({
-  type?: rtype,
-  name?: string,
-  description?: string,
-  doc?: string,
-  example?: string,
+  type?: Rtype,
+  name?: String,
+  description?: String,
+  doc?: String,
+  example?: String,
   fn: Function
 }): Function
 ```
@@ -101,5 +101,5 @@ The `type` parameter expects an `rtype` interface, which comes in many different
 It can also take a `predicate` function:
 
 ```js
-predicate(...args?: any[]): boolean
+predicate(...args?: Any[]): Boolean
 ```

@@ -53,15 +53,17 @@ See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/mast
  * @param {string} param
  * @param {array} otherParam
  * @param {number} otherParam[0]
- * ...
- * ...
- * ... (Lots of info. Not too readable.)
- * ...
- * ...
+ * @param {number} otherParam[1]
+ * @param {number} otherParam[2]
+ * @param {object} options
+ * @param {boolean} [options.beep=false]
+ * @return {number}
+ *
+ * (Lots of info. Not too readable.)
  */
 function myFunction (param, otherParam, options) {
   if (typeof param !== 'string') throw new TypeError('Oh noes!');
-  if (typeof otherParam !== 'object' || /* ...
+  if (typeof otherParam !== 'object' || otherParam.length <= 3) /* ...
   ...
   ...
   ... (Manual type checking. Dreadful!)
@@ -90,7 +92,7 @@ export const myFunction = (param, otherParam, options) => {
 
 const type = (param, otherParam, options) => (
   typeof param === 'string' &&
-  typeof otherParam === 'object' &&
+  otherParam instanceof Array &&
   /* ... (Type checking optional and neatly separated!) */
 );
 
@@ -124,7 +126,7 @@ export const myInterface = rfx({
   type: r`
     myFxName(
       param: String,
-      otherParam: [x: Number, y: Number],
+      otherParam: [x: Number, y: Number, z: Number],
       options?: {beep = false: Boolean},
     ): Number
   `,

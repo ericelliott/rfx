@@ -39,16 +39,22 @@ test('rfx', nest => {
   });
 
   nest.test('...predicate rtype, dev env & default error handling', assert => {
-    assert.plan(3);
+    assert.plan(4);
 
     process.env.NODE_ENV = 'development';
 
-    const fx = rfx({
-      type () {
-        assert.pass('should type check');
-        return false;
-      },
+    const signature = '(a: String): Void';
 
+    const type = Object.assign(
+      (a) => {
+        assert.pass('should type check');
+        return typeof a === 'string';
+      },
+      { signature }
+    );
+
+    const fx = rfx({
+      type,
       fn () {
         assert.fail('should not call fn');
       }
@@ -66,11 +72,19 @@ test('rfx', nest => {
       }
 
       {
-        const expectedContent = /wrong parameters.+predicate function/i;
+        const expectedContent = /type check failed/i;
         const actualContent = error.message;
 
         assert.ok(expectedContent.test(actualContent),
           'should throw a descriptive error');
+      }
+
+      {
+        const expectedString = signature;
+        const actualString = error.message;
+
+        assert.ok(actualString.indexOf(expectedString) !== -1,
+          'should include signature in error message');
       }
     }
   });

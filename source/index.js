@@ -3,7 +3,22 @@ import 'core-js';
 const runCheck = ({ rtype, onError, options }) => {
   return (...args) => {
     if (!rtype(...args) && typeof onError === 'function') {
-      onError({ args, options });
+      const errorMessage = (
+        `Type check failed!${ rtype.signature ?
+          (
+            ` Expected signature: \`${ rtype.signature }\`. More info: ` +
+            'https://git.io/rtype .'
+          ) :
+          ''
+        }`
+      );
+
+      const error = Object.assign(
+        new TypeError(errorMessage),
+        { args, options }
+      );
+
+      onError(error);
     }
   };
 };

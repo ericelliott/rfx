@@ -109,7 +109,7 @@ export const myInterface = rfx({
   fn: myFunction
 });
 
-myInterface(1, 2, {}); // Run `myFunction` with optional runtime type checking…
+myInterface(1, 2, {}); // Run `myFunction` with optional runtime type checking
 ```
 
 

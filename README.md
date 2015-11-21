@@ -26,7 +26,7 @@ You've arrived while the band was doing the sound check. Score! Free backstage p
 Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the predicate function:
 
 ```js
-(...args?: Any[]): Boolean
+(...args?: Any[]) => Boolean
 ```
 
 Roadmap:
@@ -109,9 +109,7 @@ export const myInterface = rfx({
   fn: myFunction
 });
 
-myInterface(1, 2, {}); // Run `myFunction` with runtime type checking…
-
-myFunction(1, 2, {}); // …or just the raw thing. Lightning-fast!
+myInterface(1, 2, {}); // Run `myFunction` with optional runtime type checking…
 ```
 
 
@@ -128,7 +126,7 @@ export const myInterface = rfx({
       param: String,
       otherParam: [x: Number, y: Number, z: Number],
       options?: {beep = false: Boolean},
-    ): Number
+    ) => Number
   `,
 
   description: /* ... */,
@@ -152,10 +150,10 @@ rfx({
   description?: String,
   doc?: String,
   example?: String,
-  onError?: (error: TypeError): Void,
+  onError?: (error: TypeError) => Void,
   ...metadata?: Object,
   fn: Function
-}): Function
+}) => Function
 ```
 
 ### The `type` Parameter
@@ -165,7 +163,7 @@ The `type` parameter expects an `rtype` interface, which comes in many different
 It can also take a `predicate` function:
 
 ```js
-predicate(...args?: Any[]): Boolean
+predicate(...args?: Any[]) => Boolean
 ```
 
 ### Error handling

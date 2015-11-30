@@ -59,4 +59,6 @@ const rfx = (options = {}) => {
   }, options.fn, options);
 };
 
+export * from './predicates';
+
 export default rfx;

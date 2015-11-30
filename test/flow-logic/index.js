@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import rfx from '../../source/index';
+import rfx, { isBoolean, isString } from '../../source/index';
 
 test('rfx', nest => {
   nest.test('...predicate rtype, dev env, onError & invalid args', assert => {
@@ -12,7 +12,7 @@ test('rfx', nest => {
       type (input) {
         assert.pass('should type check');
 
-        return typeof input === 'boolean';
+        return isBoolean(input);
       },
       fn () {
         assert.pass('should call fn');
@@ -48,7 +48,7 @@ test('rfx', nest => {
     const type = Object.assign(
       (a) => {
         assert.pass('should type check');
-        return typeof a === 'string';
+        return isString(a);
       },
       { signature }
     );
@@ -98,7 +98,7 @@ test('rfx', nest => {
       type (input) {
         assert.fail('should not type check');
 
-        return typeof input === 'boolean';
+        return isBoolean(input);
       },
       fn () {
         assert.pass('should call fn');

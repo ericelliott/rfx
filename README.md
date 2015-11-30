@@ -31,7 +31,7 @@ Here's the [Rtype signature](https://github.com/ericelliott/rtype#rtype) for the
 
 Roadmap:
 * [x] Predicate function support
-* [ ] Add rtype builtins
+* [x] Add rtype builtins
 * [ ] Add rtype string support
 
 See also: proposals in [rfx future](https://github.com/ericelliott/rfx/blob/master/doc/future.md).
@@ -84,15 +84,15 @@ npm install --save rfx
 ```
 
 ```js
-import rfx from 'rfx';
+import rfx, { isArray, isString } from 'rfx';
 
 export const myFunction = (param, otherParam, options) => {
   /* (Just business logic.) */
 }
 
 const type = (param, otherParam, options) => (
-  typeof param === 'string' &&
-  otherParam instanceof Array &&
+  isString(param) &&
+  isArray(otherParam) &&
   /* ... (Type checking optional and neatly separated!) */
 );
 

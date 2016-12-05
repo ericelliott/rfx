@@ -14,7 +14,7 @@ What does `rfx` do?
 
 It's driven by the idea originally inspired by Lisp: Code as data. We're extending this concept to type information and documentation metadata.
 
-This provides several benefits, but importantly, it makes your code literally self-documenting, and opens up the possibility of serious realtime development using live coding systems like React Transform, and powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript. (Note: The TypeScript team is actively working on [runtime type reflection](http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4), but it currently requires you to opt-in to experimental TypeScript features, and it works using the unstable `Reflect` API proposal for ES7+).
+This provides several benefits, but importantly, it makes your code literally self-documenting, and opens up the possibility of serious realtime development using live coding systems like React Transform, and powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript. (Note: The TypeScript team is actively working on [runtime type reflection](http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4), but it currently requires you to opt-in to experimental TypeScript features, and it works using the unstable `Reflect` API proposal for some future ES Next).
 
 
 ## Status - Developer Preview
@@ -111,29 +111,6 @@ myInterface(1, 2, {}); // Run `myFunction` with optional runtime type checking
 ```
 
 
-**There’s more!**
-
-Soon you won’t need to write the `type` and `name` by hand!
-
-```js
-import r from 'parse-rtype';  // Watch out! This is dreamcode!
-
-export const myInterface = rfx({
-  type: r`
-    myFxName(
-      param: String,
-      otherParam: [x: Number, y: Number, z: Number],
-      options?: {beep = false: Boolean},
-    ) => Number
-  `,
-
-  description: /* ... */,
-  doc: /* ... */,
-  example: /* ... */,
-  fn: myFunction,
-})
-```
-
 See [rtype](https://github.com/ericelliott/rtype#rtype) for more info.
 
 
@@ -156,7 +133,7 @@ rfx({
 
 ### The `type` Parameter
 
-The `type` parameter expects an `rtype` interface, which comes in many different forms, including standard JS literal notations.
+The `type` parameter expects an `rtype` interface.
 
 It can also take a `predicate` function:
 

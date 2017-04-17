@@ -1,0 +1,25 @@
+{
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "comma-dangle": [0],
+        "func-names": [0],
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "no-shadow": [0],
+        "semi": ["error", "always"],
+        "space-before-function-paren": ["error", "always"],
+        "arrow-parens": ["error", "as-needed", { "requireForBlockBody": false }]
+    }
+}

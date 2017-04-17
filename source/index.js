@@ -1,62 +1,31 @@
-import 'core-js';
+/* eslint-disable no-var */
+/* eslint-disable prefer-arrow-callback */
+var rfx = function rfx (signature) {
+  var sig = signature.toString();
 
-const runCheck = ({ rtype, onError, options }) => {
-  return (...args) => {
-    if (!rtype(...args) && typeof onError === 'function') {
-      const errorMessage = (
-        `Type check failed!${ rtype.signature ?
-          (
-            ` Expected signature: \`${ rtype.signature }\`. More info: ` +
-            'https://git.io/rtype .'
-          ) :
-          ''
-        }`
-      );
-
-      const error = Object.assign(
-        new TypeError(errorMessage),
-        { args, options }
-      );
-
-      onError(error);
-    }
+  return function (subject) {
+    return Object.assign(subject, {
+      rfx: Object.assign(function rfx () {
+        /* eslint-disable no-console */
+        console.log(sig);
+      }, {
+        signature: sig
+      })
+    });
   };
 };
 
-const buildCheck = (params) => {
-  const { shouldCheck, rtype, options } = params;
+rfx = rfx(
+  '/*\n' +
+  '  Take an rtype type description and a subject (curried), and return \n' +
+  '  the function augmented with supplied documentation. \n' +
+  '*/\n' +
+  'rfx(signature) => (subject: s) => s & {\n' +
+  '  rfx(), effects(log signature to console)\n' +
+  '} & {\n' +
+  '  signature: string\n' +
+  '}'
+)(rfx);
 
-  const shouldThrowByDefault = typeof process !== 'undefined' &&
-    process.env.NODE_ENV === 'development';
-
-  const onError = (typeof options.onError === 'function' ?
-    options.onError :
-    (shouldThrowByDefault ?
-      (error) => { throw error; } :
-      null
-    )
-  );
-
-  return shouldCheck ?
-    typeof rtype === 'function' ?
-      runCheck({ rtype, onError, options }) :
-      null :
-    null;
-};
-
-const rfx = (options = {}) => {
-  const { type, onError } = options;
-
-  const shouldCheck = typeof process !== 'undefined' &&
-    process.env.NODE_ENV !== 'production';
-
-  const check = buildCheck({ shouldCheck, rtype: type, onError, options });
-
-  return Object.assign(function fx (...args) {
-    const { fn } = options;
-    if (typeof check === 'function') check(...args);
-    return fn(...args);
-  }, options.fn, options);
-};
-
-export default rfx;
+module.exports = rfx;
+module.exports.default = rfx;

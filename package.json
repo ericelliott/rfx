@@ -5,12 +5,10 @@
   "main": "build/index.js",
   "scripts": {
     "lint": "eslint test source",
-    "clean": "rimraf build && mkdir build",
-    "prebuild": "npm run clean",
-    "build": "babel -d build source -s",
-    "test": "babel-node test/index.js",
-    "check": "npm run -s lint && npm -s test && npm -s run build",
-    "watch": "watch 'clear && npm run -s lint && npm -s test' source test"
+    "test": "node test/index.js",
+    "check": "npm run -s lint && npm -s test",
+    "watch": "watch 'clear && npm run -s lint && npm -s test' source test",
+    "update": "updtr"
   },
   "repository": {
     "type": "git",
@@ -32,16 +30,12 @@
   },
   "homepage": "https://github.com/ericelliott/rfx#readme",
   "devDependencies": {
-    "babel": "^5.8.23",
-    "babel-eslint": "^4.1.3",
-    "eslint": "^1.6.0",
-    "lodash": "^3.10.1",
-    "rimraf": "^2.4.3",
-    "tape": "^4.2.1",
-    "watch": "^0.16.0"
+    "eslint": "3.19.0",
+    "eslint-config-airbnb-base": "11.1.3",
+    "eslint-plugin-import": "2.2.0",
+    "tape": "4.6.3",
+    "updtr": "1.0.0",
+    "watch": "1.0.2"
   },
-  "dependencies": {
-    "core-js": "^1.2.6",
-    "stamp-utils": "^1.2.4"
-  }
+  "dependencies": {}
 }

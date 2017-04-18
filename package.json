@@ -2,7 +2,7 @@
   "name": "rfx",
   "version": "2.0.0",
   "description": "A dead simple API to integrate rtypes into live code.",
-  "main": "build/index.js",
+  "main": "source/index.js",
   "scripts": {
     "lint": "eslint test source",
     "test": "node test/index.js",

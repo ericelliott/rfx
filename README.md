@@ -18,7 +18,7 @@ It's driven by the idea originally inspired by Lisp: Code as data. We're extendi
 This provides several benefits, but importantly, it makes your code literally self-documenting, and paves the way for powerful in-app developer tooling that is not available using compile-time type systems such as TypeScript. (Note: The TypeScript team is actively working on [runtime type reflection](http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4), but it currently requires you to opt-in to experimental TypeScript features, and it works using the unstable `Reflect` API proposal for some future ES Next).
 
 
-## Status - Request for Comments
+## Status - Ready for Testing & Feedback
 
 The documentation features of `rfx` are working today. Feel free to experiment and open an issue with your comments.
 
